@@ -1,6 +1,8 @@
 package bookstore;
 
-public class Book {
+import java.io.Serializable;
+
+public class Book implements Serializable {
 
     // Attributes
     protected String author;

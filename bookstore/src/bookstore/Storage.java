@@ -1,6 +1,8 @@
 package bookstore;
 
-public class Storage extends Book {
+import java.io.Serializable;
+
+public class Storage extends Book implements Serializable {
 
     // Attributes
     protected int shelfNumber;
