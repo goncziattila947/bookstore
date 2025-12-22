@@ -11,7 +11,7 @@ public class Book {
 
 
     // Constructor
-    public Book(String title, String author, String topic, int year, int price) {
+    public Book(String author, String title, String topic, int year, int price) {
         this.author = author;
         this.title = title;
         this.topic = topic;
