@@ -62,10 +62,10 @@ public class StoreGUI extends JFrame implements ActionListener{
                 searchBook();
                 break;
             case "Rendelés":
-                // Order book logic
+                orderBook();
                 break;
             case "Feltöltés":
-                // Upload book logic
+                uploadBooks();
                 break;
             case "Kilépés":
                 System.exit(0);
@@ -253,6 +253,52 @@ public class StoreGUI extends JFrame implements ActionListener{
 
         JOptionPane.showMessageDialog(null, sb.toString());
 
+    }
+
+
+
+    private void orderBook() {
+
+        List results = new java.util.ArrayList<>();
+
+        for (Storage storage : store.getBooks()) {
+            if (storage.getPiece() < 10) {
+                results.add(storage);
+            }
+        }
+
+        if(results.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Nincs rendelésre szoruló könyv.");
+            return;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        for (Object r : results) {
+            Storage book = (Storage) r;
+            sb.append("Szerző: ").append(book.getAuthor()).append("\n");
+            sb.append("Cím: ").append(book.getTitle()).append("\n");
+            sb.append("Darabszám: ").append(book.getPiece()).append("\n\n");
+        }
+
+        JOptionPane.showMessageDialog(null, sb.toString());
+    }
+
+
+    private void uploadBooks() {
+        boolean anyLowStock = false;
+        for (Storage storage : store.getBooks()) {
+            if (storage.getPiece() < 10) {
+                int load = Integer.parseInt(JOptionPane.showInputDialog("Szerző: " + storage.getAuthor() + "\nCím: " + storage.getTitle() + "\njelenlegi db: " + storage.getPiece() + "\nHány érkezett?"));
+                storage.addPiece(load);
+                anyLowStock = true;
+            }
+        }
+        if (!anyLowStock) {
+            JOptionPane.showMessageDialog(this, "Nincs feltöltendő könyv.");
+        } else {
+            store.writeToFile("store.dat");
+            JOptionPane.showMessageDialog(this, "Könyvek sikeresen feltöltve!");
+        }
     }
 
 
