@@ -6,11 +6,12 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Store implements Serializable {
 
-    // Attributes
-    private ArrayList<Storage> books;
+    // Attribute
+    private List<Storage> books;
 
 
     // Constructor
@@ -19,8 +20,8 @@ public class Store implements Serializable {
     }
 
     
-    // Getters
-    public ArrayList<Storage> getStore() { return books; }
+    // Getter
+    public List<Storage> getBooks() { return books; }
 
 
 
@@ -38,7 +39,7 @@ public class Store implements Serializable {
         try (ObjectInputStream is = new ObjectInputStream(new FileInputStream(filename))) {
 	        books = (ArrayList<Storage>) is.readObject();
 	    }
-	    catch (Exception e) {
+	    catch (Exception _) {
 	        books = new ArrayList<>();
 	    }
     }
